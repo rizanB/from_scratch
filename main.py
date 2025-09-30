@@ -2,6 +2,7 @@ import numpy as np
 from simple_cnn import Simple1DCNN
 from loss.SquaredErrorLoss import SquaredErrorLoss
 from utils.plot_loss_curve import plot_loss_curve
+from timeit import timeit
 
 np.random.seed(42)
 x = np.arange(1, 1000)
@@ -10,7 +11,7 @@ x = np.arange(1, 1000)
 x = np.array(x)
 
 # normalize x
-x = (x - x.min())/(x.max() - x.min())
+x = (x - x.min()) / (x.max() - x.min())
 y = np.array([0.57])
 
 l = SquaredErrorLoss()
@@ -18,8 +19,10 @@ l = SquaredErrorLoss()
 simplecnn = Simple1DCNN()
 
 # training loop
-epochs = 20
+epochs = 200
 losses = []
+
+start = timeit()
 
 for epoch in range(epochs):
 
@@ -29,9 +32,11 @@ for epoch in range(epochs):
 
     simplecnn.backward(x=x, y_pred=y_pred, y=y, lr=0.01, verbose=False)
 
-    # every two epochs
-    if (epochs <= 10):
+    if epochs <= 10:
         print(f"epoch: {epoch+1} loss: {l_epoch}")
 
+end = timeit()
 
-plot_loss_curve(losses=losses)
+print(f"time taken to train model: {end - start}")
+
+# plot_loss_curve(losses=losses)
