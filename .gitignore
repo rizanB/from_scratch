@@ -1,0 +1,32 @@
+# compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C exts
+*.so
+
+# builds
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# test/ cov reports
+htmlcov/
+.coverage
+.pytest_cache/
+
+# vscode sp
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# os files
+.DS_Store
+Thumbs.db
