@@ -19,7 +19,7 @@ l = SquaredErrorLoss()
 simplecnn = Simple1DCNN()
 
 # training loop
-epochs = 200
+epochs = 30
 losses = []
 
 start = timeit()
@@ -32,11 +32,10 @@ for epoch in range(epochs):
 
     simplecnn.backward(x=x, y_pred=y_pred, y=y, lr=0.01, verbose=False)
 
-    if epochs <= 10:
-        print(f"epoch: {epoch+1} loss: {l_epoch}")
+    print(f"epoch: {epoch+1} loss: {l_epoch}")
 
 end = timeit()
 
 print(f"time taken to train model: {end - start}")
 
-# plot_loss_curve(losses=losses)
+plot_loss_curve(losses=losses)
