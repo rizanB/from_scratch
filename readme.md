@@ -60,4 +60,4 @@ A working example is provided in simple_cnn.py
 ### Installation
 
 1. Clone this repo: ```git clone https://github.com/rizanB/from_scratch.git```
-2. Install dependencies with pip or condas: ```numpy matplotlib timeit```
+2. Install dependencies with pip or conda: ```numpy matplotlib timeit```
