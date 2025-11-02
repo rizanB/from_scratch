@@ -1,6 +1,8 @@
 import numpy as np
 
-from utils.printv import printv
+from utils.logging_helper import get_logger
+
+logger = get_logger(__name__)
 
 
 class MaxPool1D:
@@ -10,6 +12,7 @@ class MaxPool1D:
 
         # store indices of max fmap values
         self.mask_fmaps = []
+        logger.info("Maxpool1d layer initialized")
 
     def forward(self, x: np.ndarray, verbose=False) -> np.ndarray:
         """performs max pooling and tracks pooled indices:
@@ -33,7 +36,7 @@ class MaxPool1D:
         # fixes bug: by resetting feature masks for every forward pass
         self.mask_fmaps = []
 
-        printv(f"x going into maxpool1d: {x}, shape: {self.x_shape}", verbose)
+        logger.debug(f"Maxpool1d forward - input shape: {self.x_shape}")
 
         for fmap in x:
             pooled = []
@@ -52,15 +55,12 @@ class MaxPool1D:
 
                 mask_fmap.append(true_maxidx)
                 pooled.append(max(fmap[i : i + self.kernel_size]))
-            # print(f"mask_fmap:  {mask_fmap}")
 
             pooling_output.append(pooled)
             self.mask_fmaps.append(mask_fmap)
 
-        printv(f"mask stored in maxpool class mask_fmaps: {self.mask_fmaps}", verbose)
-        printv(
-            f"output from maxpool1d: {pooling_output}, shape: {np.array(pooling_output).shape}",
-            verbose,
+        logger.debug(
+            f"Maxpool1d forward - output shape: {np.array(pooling_output).shape}"
         )
 
         return np.array(pooling_output)

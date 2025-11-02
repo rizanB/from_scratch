@@ -1,5 +1,9 @@
 import numpy as np
+
 from activations.Sigmoid import Sigmoid
+from utils.logging_helper import get_logger
+
+logger = get_logger(__name__)
 
 
 class Swish:
@@ -11,12 +15,12 @@ class Swish:
         swish activation function
 
         Args:
-        x (np.ndarray): input array
+        z (np.ndarray): input array
 
         Returns:
         swish (np.ndarray): swish activated array
         """
-
+        logger.debug(f"Swish forward - input shape: {z.shape}")
         return z * self.sigmoid.forward(z)
 
     def backward():
