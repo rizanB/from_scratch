@@ -1,5 +1,8 @@
 import numpy as np
-from utils.printv import printv
+
+from utils.logging_helper import get_logger
+
+logger = get_logger(__name__)
 
 
 class ReLU:
@@ -18,8 +21,9 @@ class ReLU:
             (np.ndarray): relu of z, with +ve values only
         """
 
-        # takes in a np.ndarray of feature maps like [ [1,2] [2,3] ]
-        printv(f"relu of x: {np.maximum(0, z)}", verbose)
+        logger.debug(f"Relu forward - input shape: {z.shape}")
+
+        # takes in feature maps like [ [1,2] [2,3] ]
         return np.maximum(0, z)
 
     def backward():

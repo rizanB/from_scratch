@@ -1,9 +1,12 @@
 import numpy as np
 
+from utils.logging_helper import get_logger
+
+logger = get_logger(__name__)
+
 
 class Sigmoid:
     def __init__(self):
-        # sigmoid output for backprop
         self.sigmoid_out = None
 
     def forward(self, z: np.ndarray, verbose=False):
@@ -17,6 +20,8 @@ class Sigmoid:
         Returns:
         sigmoid (np.ndarray): sigmoid of z, with values between 0 and 1
         """
+
+        logger.debug(f"Sigmoid forward - input shape: {z.shape}")
 
         self.sigmoid_out = np.where(
             z >= 0, 1 / (1 + np.exp(-z)), np.exp(z) / (1 + np.exp(z))

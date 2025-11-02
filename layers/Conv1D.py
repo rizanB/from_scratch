@@ -1,6 +1,9 @@
 import numpy as np
+
+from utils.logging_helper import get_logger
 from utils.pad_input import pad_input
-from utils.printv import printv
+
+logger = get_logger(__name__)
 
 
 class Conv1D:
@@ -17,6 +20,7 @@ class Conv1D:
         self.stride = stride
         self.pooling_kernel_size = pooling_kernel_size
         self.bias = np.zeros(num_filters)
+        logger.info("Conv1D layer initialized")
 
     # x = [1, 2, 3, 4, 5], filters = sth like [[1 2] [ 2 3]]
     def forward(self, x: np.ndarray, verbose=False) -> np.ndarray:
@@ -31,8 +35,9 @@ class Conv1D:
         """
 
         self.x = x
+        logger.debug(f"Conv1D forward - input shape: {self.x.shape}")
 
-        len_x = len(x)
+        len(x)
         k = self.filter_size
 
         # add padding before conv; so output is same size as input after conv
@@ -64,7 +69,7 @@ class Conv1D:
         grad_wrt_input = conv of grad_output wrt flipped filter
 
         Args:
-            grad_output (np.ndarray) of shape (num_filters, output_length): grad output from next layer
+            grad_output (np.ndarray) of shape (num_filters, output_length)
             lr: learning rate
 
 
@@ -94,11 +99,5 @@ class Conv1D:
         # update weights and bias
         self.filters -= lr * grad_wrt_filter
         self.bias -= lr * grad_wrt_bias
-
-        printv(f"grad wrt filters: {grad_wrt_filter}", verbose)
-        printv(f"grad wrt bias: {grad_wrt_bias}", verbose)
-        printv(
-            f"grad wrt input: {grad_wrt_input}, length: {len(grad_wrt_input)}", verbose
-        )
 
         return grad_wrt_input

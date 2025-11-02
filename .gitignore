@@ -16,6 +16,9 @@ dist/
 pip-log.txt
 pip-delete-this-directory.txt
 
+#logs
+logs/
+
 # test/ cov reports
 htmlcov/
 .coverage

@@ -1,5 +1,8 @@
 import numpy as np
-from utils.printv import printv
+
+from utils.logging_helper import get_logger
+
+logger = get_logger(__name__)
 
 
 class FCNN:
@@ -10,6 +13,7 @@ class FCNN:
         self.bias = np.random.randn(
             output_size,
         )
+        logger.info("FCNN layer initialized")
 
     def forward(self, x):
         """forward pass through fully connected nn
@@ -21,8 +25,10 @@ class FCNN:
             z: logits
         """
 
-        # refactor: store x inside the layer so backward doesnt need input during backprop
+        # refactor: store x for backprop
         self.x = x
+
+        logger.debug(f"FCNN forward - input shape: {self.x.shape}")
 
         return np.dot(self.weights, x) + self.bias
 
@@ -52,18 +58,15 @@ class FCNN:
         """
 
         loss_grad_wrt_w = np.outer(grad_output, self.x)
-        printv(f"loss grad wrt w is: {loss_grad_wrt_w}", verbose)
 
         # update fc weights
         self.weights -= lr * loss_grad_wrt_w
 
         loss_grad_wrt_b = grad_output
-        printv(f"loss grad wrt b is: {loss_grad_wrt_b}", verbose)
 
         # update fc bias
         self.bias -= lr * loss_grad_wrt_b
 
         loss_grad_wrt_x = np.dot(self.weights.T, grad_output)
-        printv(f"loss grad wrt x is: {loss_grad_wrt_x}", verbose)
 
         return loss_grad_wrt_x

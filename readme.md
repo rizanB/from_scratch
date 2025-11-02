@@ -15,12 +15,12 @@ My OOP implementation of a 1D CNN (NumPy) with forward propagation and backpropa
 - **Loss Functions:** Squared Error Loss (MSE), Binary Cross-Entropy (planned)
 - **Forward and Backward Pass:** gradients computed by chain rule
 - **Flatten Layer:** Reshapes feature maps for FCNN
-- **Utility Function:** Padding
-- **Enhancements:**  
-  - Batching  
-  - Support for multiple channels  
-  - Xavier/He initialization  
-  - Gradient clipping & numerical checks  
+- **Utility Function:** Padding, logging
+- **Future additions:**
+  - Batching
+  - Support for multiple channels
+  - Xavier/He initialization
+  - Gradient clipping & numerical checks
   - Experiment tracking (W&B)
   - Vectorization
   - Tensor implementation wth CUDA support
@@ -29,28 +29,30 @@ My OOP implementation of a 1D CNN (NumPy) with forward propagation and backpropa
 
 ## 📁 Repository Structure
 ```
-├── activations
+.
+├── activations                 #nn activations
 │   ├── LeakyReLU.py
 │   ├── ReLU.py
 │   ├── Sigmoid.py
 │   └── Swish.py
-├── layers
+├── config.py                   #project-wide config
+├── layers                      #nn layers
 │   ├── AvgPool1D.py
 │   ├── Conv1D.py
 │   ├── FCNN.py
 │   ├── Flatten.py
 │   ├── MaxPool1D.py
-├── loss
+├── loss                        #loss functions
 │   ├── BCELoss.py
 │   ├── MSELoss.py
 │   └── SquaredErrorLoss.py
 ├── main.py
 ├── readme.md
-├── simple_cnn.py
+├── simple_cnn.py               #1d cnn example
 └── utils
+    ├── logging_helper.py       #helper function for logging
     ├── pad_input.py
-    ├── plot_loss_curve.py
-    ├── printv.py
+    └── plot_loss_curve.py
 ```
 
 ## ⚡ Usage Example

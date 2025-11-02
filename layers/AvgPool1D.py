@@ -1,9 +1,14 @@
 import numpy as np
 
+from utils.logging_helper import get_logger
+
+logger = get_logger(__name__)
+
 
 class AvgPool1D:
     def __init__(self, kernel_size=2):
         self.kernel_size = kernel_size
+        logger.info("AvgPool1D layer initialized")
 
     def forward(self, x: np.ndarray) -> np.ndarray:
         """
@@ -16,6 +21,7 @@ class AvgPool1D:
             np.ndarray: pooled output
         """
 
+        logger.debug(f"Avgpool1d forward - input shape: {x.shape}")
         pooling_output = []
 
         for fmap in x:

@@ -1,5 +1,9 @@
 import numpy as np
 
+from utils.logging_helper import get_logger
+
+logger = get_logger(__name__)
+
 
 class LeakyReLU:
     def __init__(self):
@@ -9,12 +13,15 @@ class LeakyReLU:
         """applies leaky relu activation fn
 
         Args:
-            x (np.ndarray): input array
+            z (np.ndarray): input array
             alpha (float): slope of neg section of fn
 
         Returns:
             (np.ndarray)
         """
+
+        logger.debug(f"Leakyrelu forward - input shape: {z.shape}")
+
         return np.where(z < 0, alpha * z, z)
 
     def backward():
